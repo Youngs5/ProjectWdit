@@ -31,9 +31,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     {'text': '스터디', 'state': false, 'menu': '카테고리'},
     {'text': '취미', 'state': false, 'menu': '카테고리'},
     {'text': '카풀', 'state': false, 'menu': '카테고리'},
-    {'text': '남자', 'state': false, 'menu': '성별'},
-    {'text': '여자', 'state': false, 'menu': '성별'},
-    {'text': '아무나', 'state': false, 'menu': '성별'},
+    {'text': '산책', 'state': false, 'menu': '카테고리'},
   ];
 
   @override
@@ -97,11 +95,11 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
         Padding(
           padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
           child: Text(
-            'Category',
+            '필터',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 18,
+              fontSize: 14,
               letterSpacing: 0.27,
               color: DesignCourseAppTheme.darkerText,
             ),
@@ -209,11 +207,11 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Clubs',
+            '모임 목록',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 18,
+              fontSize: 14,
               letterSpacing: 0.27,
               color: DesignCourseAppTheme.darkerText,
             ),

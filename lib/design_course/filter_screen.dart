@@ -83,59 +83,59 @@ class _FilterScreenState extends State<FilterScreen> with TickerProviderStateMix
                   Positioned(
                     child: Column(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 5),
-                              child: Text(
-                                "성별",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 8,),
-                            Row(
-                              children: [
-                                for(int i = 0; i < filterState.length; i++)
-                                  if(filterState[i]['menu'] == '성별')
-                                    GestureDetector(
-                                      onTap: (){
-                                        setState(() {
-                                          // print(filterState[i]['text']);
-                                          filterState[i]['state'] = !filterState[i]['state'];
-                                        });                 
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 5),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
-                                          color: filterState[i]['state']
-                                            ?DesignCourseAppTheme.nearlyBlue.withOpacity(0.9)
-                                            : Colors.grey.withOpacity(0.3),
-                                        ),
-                                        padding: EdgeInsets.fromLTRB(14, 7, 14, 7),
-                                        child: Text(
-                                          filterState[i]['text'],
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: filterState[i]['state']
-                                            ?Colors.white
-                                            : Colors.black,
-                                            fontWeight: filterState[i]['state']
-                                            ? FontWeight.w600
-                                            : FontWeight.w500
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 15,),
+                        // Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     Container(
+                        //       margin: EdgeInsets.symmetric(horizontal: 5),
+                        //       child: Text(
+                        //         "성별",
+                        //         style: TextStyle(
+                        //           fontSize: 15,
+                        //           fontWeight: FontWeight.w600
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     SizedBox(height: 8,),
+                        //     Row(
+                        //       children: [
+                        //         for(int i = 0; i < filterState.length; i++)
+                        //           if(filterState[i]['menu'] == '성별')
+                        //             GestureDetector(
+                        //               onTap: (){
+                        //                 setState(() {
+                        //                   // print(filterState[i]['text']);
+                        //                   filterState[i]['state'] = !filterState[i]['state'];
+                        //                 });                 
+                        //               },
+                        //               child: Container(
+                        //                 margin: EdgeInsets.symmetric(horizontal: 5),
+                        //                 decoration: BoxDecoration(
+                        //                   borderRadius: BorderRadius.circular(15),
+                        //                   color: filterState[i]['state']
+                        //                     ?DesignCourseAppTheme.nearlyBlue.withOpacity(0.9)
+                        //                     : Colors.grey.withOpacity(0.3),
+                        //                 ),
+                        //                 padding: EdgeInsets.fromLTRB(14, 7, 14, 7),
+                        //                 child: Text(
+                        //                   filterState[i]['text'],
+                        //                   textAlign: TextAlign.center,
+                        //                   style: TextStyle(
+                        //                     color: filterState[i]['state']
+                        //                     ?Colors.white
+                        //                     : Colors.black,
+                        //                     fontWeight: filterState[i]['state']
+                        //                     ? FontWeight.w600
+                        //                     : FontWeight.w500
+                        //                   ),
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //       ],
+                        //     ),
+                        //   ],
+                        // ),
+                        // SizedBox(height: 15,),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
