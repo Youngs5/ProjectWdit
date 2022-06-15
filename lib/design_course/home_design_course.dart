@@ -23,15 +23,15 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
   String? userName;
   String? userEmail;
   String? userImage;
-  
+
   List filterList = [];
 
   List filterStateBuffer = [
-    {'text': '스포츠', 'state': false, 'menu': '카테고리'},
-    {'text': '스터디', 'state': false, 'menu': '카테고리'},
-    {'text': '취미', 'state': false, 'menu': '카테고리'},
-    {'text': '카풀', 'state': false, 'menu': '카테고리'},
-    {'text': '산책', 'state': false, 'menu': '카테고리'},
+    {'text': '스포츠', 'state': false},
+    {'text': '스터디', 'state': false},
+    {'text': '취미', 'state': false},
+    {'text': '카풀', 'state': false},
+    {'text': '산책', 'state': false},
   ];
 
   @override
@@ -41,19 +41,19 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     super.initState();
   }
 
-  void getCurrentUser(){
-    try{
+  void getCurrentUser() {
+    try {
       final user = _auth.currentUser;
-      if(user != null){
+      if (user != null) {
         userName = user.displayName;
         userEmail = user.email;
         userImage = user.photoURL;
         print(user.uid);
       }
-    }catch(e){
+    } catch (e) {
       print(e);
     }
-  }  
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,29 +113,28 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
           child: Row(
             children: <Widget>[
               IconButton(
-                onPressed: ()async {
-                  final returnData = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FilterScreen(filterStateList: [...filterStateBuffer],)
-                    )
-                  );
+                  onPressed: () async {
+                    final returnData = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FilterScreen(
+                                  filterStateList: [...filterStateBuffer],
+                                )));
 
-                  if (returnData != null) {
-                    List filter = [];
-                    for (Map<String, dynamic> filterItem in returnData) {
-                      if(filterItem['state'] == true) {
-                        filter.add(filterItem['text']);
+                    if (returnData != null) {
+                      List filter = [];
+                      for (Map<String, dynamic> filterItem in returnData) {
+                        if (filterItem['state'] == true) {
+                          filter.add(filterItem['text']);
+                        }
                       }
+                      setState(() {
+                        filterList = filter;
+                        filterStateBuffer = [...returnData];
+                      });
                     }
-                    setState(() {
-                      filterList = filter;
-                      filterStateBuffer = [...returnData];
-                    });
-                  }
-                },
-                icon: Icon(Icons.filter_list)
-              ),
+                  },
+                  icon: Icon(Icons.filter_list)),
               const SizedBox(
                 width: 8,
               ),
@@ -147,47 +146,48 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: filterStateBuffer.length,
                     itemBuilder: (context, i) {
-                        return  GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                filterStateBuffer[i]['state'] = !filterStateBuffer[i]['state'];
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            filterStateBuffer[i]['state'] =
+                                !filterStateBuffer[i]['state'];
 
-                                List filter = [];
-                                for (Map<String, dynamic> filterItem in filterStateBuffer) {
-                                  if(filterItem['state'] == true) {
-                                    filter.add(filterItem['text']);
-                                  }
-                                }
-                                setState(() {
-                                  filterList = filter;
-                                  filterStateBuffer = [...filterStateBuffer];
-                                });                            
+                            List filter = [];
+                            for (Map<String, dynamic> filterItem
+                                in filterStateBuffer) {
+                              if (filterItem['state'] == true) {
+                                filter.add(filterItem['text']);
                               }
-                            );                 
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: filterStateBuffer[i]['state']
-                                ?DesignCourseAppTheme.nearlyBlue.withOpacity(0.9)
+                            }
+                            setState(() {
+                              filterList = filter;
+                              filterStateBuffer = [...filterStateBuffer];
+                            });
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: filterStateBuffer[i]['state']
+                                ? DesignCourseAppTheme.nearlyBlue
+                                    .withOpacity(0.9)
                                 : Colors.grey.withOpacity(0.2),
-                            ),
-                            padding: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                            child: Text(
-                              filterStateBuffer[i]['text'],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: filterStateBuffer[i]['state']
-                                ?Colors.white
-                                : Colors.black,
-                                fontWeight: filterStateBuffer[i]['state']
-                                ? FontWeight.w600
-                                : FontWeight.w500
-                              ),
-                            ),
                           ),
-                        );
+                          padding: EdgeInsets.fromLTRB(15, 4, 15, 7),
+                          child: Text(
+                            filterStateBuffer[i]['text'],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: filterStateBuffer[i]['state']
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontWeight: filterStateBuffer[i]['state']
+                                    ? FontWeight.w600
+                                    : FontWeight.w500),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -217,7 +217,9 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             ),
           ),
           Flexible(
-            child: ClubListView(filterData: filterList,),
+            child: ClubListView(
+              filterData: filterList,
+            ),
           )
         ],
       ),
@@ -252,8 +254,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
               });
             },
             child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 7, bottom: 7),
+              padding: const EdgeInsets.only(top: 7, bottom: 7),
               child: Center(
                 child: Text(
                   txt,
@@ -349,16 +350,20 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
 
   Widget getAppBarUI() {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 18, right: 18, bottom: 8.0),
+      padding:
+          const EdgeInsets.only(top: 8.0, left: 18, right: 18, bottom: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Image.asset('assets/images/wdit4.png', height: 33,),
+          Image.asset(
+            'assets/images/wdit4.png',
+            height: 33,
+          ),
           Row(
             children: [
               IconButton(
                 icon: Icon(Icons.add),
-                onPressed: (){
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -368,10 +373,10 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                     ),
                   );
                 },
-              ),              
+              ),
               IconButton(
                 icon: Icon(Icons.search),
-                onPressed: (){
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -384,24 +389,24 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                 },
               ),
               GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {return MyPage();},
-                      ));
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return MyPage();
+                    },
+                  ));
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50.0),
                   child: Image.network(
-                      '$userImage',
-                      height: 33,
-                      width: 33,
+                    '$userImage',
+                    height: 33,
+                    width: 33,
                   ),
                 ),
               ),
             ],
-          )  
+          )
         ],
       ),
     );

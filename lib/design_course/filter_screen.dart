@@ -153,7 +153,7 @@ class _FilterScreenState extends State<FilterScreen> with TickerProviderStateMix
                             Row(
                               children: [
                                 for(int i = 0; i < filterState.length; i++)
-                                  if(filterState[i]['menu'] == '카테고리')
+                                  // if(filterState[i]['menu'] == '카테고리')
                                     GestureDetector(
                                       onTap: (){
                                         setState(() {
